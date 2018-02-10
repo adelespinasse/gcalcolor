@@ -5,6 +5,11 @@
 
   "description": "Colorizes events in the new Google Calendar.",
 
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png"
+  },
+  
   "content_scripts": [
     {
       "matches": ["*://calendar.google.com/calendar*"],
