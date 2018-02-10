@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "GcalColor",
+  "version": "0.1",
+
+  "description": "Colorizes events in the new Google Calendar.",
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.google.com/calendar*"],
+      "js": ["content.js"]
+    }
+  ]
+
+}
