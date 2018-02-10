@@ -8,8 +8,8 @@ It isn't yet in the extension directories for Chrome and Firefox, but for now yo
 
 ### Chrome
 
-Download a zip file of this repo using the "Clone or download" button above, and unzip the files. Go to [chrome://extensions/](chrome://extensions/), enable developer mode (checkbox at the top), click "Load unpacked extension...", and select the unzipped directory. Reload your Google Calendar tab.
+Download a zip file of this repo using the "Clone or download" button above, and unzip the files. Go to `chrome://extensions/`, enable developer mode (checkbox at the top), click "Load unpacked extension...", and select the unzipped directory. Reload your Google Calendar tab.
 
 ### Firefox
 
-Download a zip file of this repo using the "Clone or download" button above, and unzip the files. Go to [about:debugging](about:debugging) and click "Load Temporary Add-on". Select the manifest.json file in the unzipped directory.
+Download a zip file of this repo using the "Clone or download" button above, and unzip the files. Go to `about:debugging` and click "Load Temporary Add-on". Select the `manifest.json` file in the unzipped directory.
