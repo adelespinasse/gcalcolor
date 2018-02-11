@@ -2,9 +2,17 @@
 
 This is a browser extension that colors event titles in the new Google Calendar according to your chosen color for each calendar (more like the old Calendar, pre-2018).
 
-It isn't yet in the extension directories for Chrome and Firefox, but for now you can install it manually.
+It isn't yet in the extension directory for Firefox, but for now you can install it manually.
+
+## Installation
+
+### Chrome
+
+[Install from Chrome Web Store](https://chrome.google.com/webstore/detail/gcalcolor/edegnmdhngniabdiiidplepangdoccna)
 
 ## Manual installation
+
+NOTE: With manual installation, the extension will not be automatically updated. You'll need to update it manually to get newer features. Also, if you switch to the version from the Web store, you should uninstall the manually installed version.
 
 ### Chrome
 
