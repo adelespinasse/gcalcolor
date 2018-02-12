@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "GcalColor",
-  "version": "0.1",
+  "version": "0.2",
 
   "description": "Colorizes events in the new Google Calendar.",
 
