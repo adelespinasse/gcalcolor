@@ -41,13 +41,13 @@ function colorizeAll() {
 // colorizeAll only when the timer completes without another callback.
 //
 // Because there are a lot of irregularly timed screen updates when
-// the page is first being loaded, we set the delay to half a second
-// at first. After five seconds, we set it to 50 milliseconds for a
+// the page is first being loaded, we set the delay to a quarter second
+// at first. After five seconds, we set it to 20 milliseconds for a
 // faster response to small updates.
 
 let timeoutId = null;
-let observerDelay = 500;
-setTimeout(() => { observerDelay = 50; }, 5000);
+let observerDelay = 250;
+setTimeout(() => { observerDelay = 20; }, 5000);
 
 function postObserverCallbacks() {
   timeoutId = null;
