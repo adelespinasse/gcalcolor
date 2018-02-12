@@ -9,18 +9,59 @@
 // reduces padding to help line up events and let you see more of
 // their names.
 function colorizeEvent(eventEl) {
+  let success = true;
+  // first try layout for all calendar views except Schedule (Agenda)
   let dotEl = eventEl;
   for (let i=0; i<3; i++) {
     dotEl = dotEl.firstChild;
-    if (!dotEl)
-      return;
+    if (!dotEl) {
+      success = false;
+      break;
+    }
   }
-  let color = dotEl.style.borderColor;
-  if (!color)
-    return; // Probably not a timed event
-  eventEl.firstChild.style.color = color;
-  eventEl.firstChild.style.padding = '0';
-  dotEl.style.display = 'none';
+  if (success) {
+    let color = dotEl.style.borderColor;
+    if (!color) {
+      success = false;  // Probably not a timed event
+    }
+    else {
+      eventEl.firstChild.style.color = color;
+      eventEl.firstChild.style.padding = '0';
+      dotEl.style.display = 'none';
+    }
+  }
+
+  // if the above failed, try the Schedule (Agenda) layout
+  if (!success) {
+    let timeEl = eventEl.firstChild;
+    if (!timeEl) {
+      return;
+    }
+    let detailsEl = timeEl.nextSibling;
+    if (!detailsEl) {
+      return;
+    }
+    let dotContainer1El = detailsEl.nextSibling;
+    if (!dotContainer1El) {
+      return;
+    }
+    let dotContainer2El = dotContainer1El.firstChild;
+    if (!dotContainer2El) {
+      return;
+    }
+    let dotEl = dotContainer2El.firstChild;
+    if (!dotEl) {
+      return;
+    }
+    let color = dotEl.style.borderColor;
+    if (!color) {
+      return;
+    }
+    else {
+      detailsEl.style.color = color;
+      dotContainer1El.style.display = 'none';
+    }
+  }
 }
 
 // Colorizes all visible events.
