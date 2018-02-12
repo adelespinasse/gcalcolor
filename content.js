@@ -10,7 +10,7 @@
 // their names.
 function colorizeEvent(eventEl) {
   let success = true;
-  // first try layout for all calendar views except Schedule (Agenda)
+  // First try layout for month and multi-week (custom) views.
   let dotEl = eventEl;
   for (let i=0; i<3; i++) {
     dotEl = dotEl.firstChild;
