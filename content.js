@@ -59,6 +59,7 @@ function colorizeEvent(eventEl) {
     }
     else {
       detailsEl.style.color = color;
+      eventEl.style.height = '26px';
       dotContainer1El.style.display = 'none';
     }
   }
