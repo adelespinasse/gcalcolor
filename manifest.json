@@ -1,8 +1,8 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "GcalColor",
   "description": "Colorize events in the new Google Calendar. (Keywords: Gcal color colors event)",
-  "version": "0.31",
+  "version": "0.4",
   "author": "Alan deLespinasse",
   "homepage_url": "https://github.com/adelespinasse/gcalcolor",
 
@@ -10,7 +10,7 @@
     "16": "icon16.png",
     "48": "icon48.png"
   },
-  
+
   "content_scripts": [
     {
       "matches": ["*://calendar.google.com/calendar*"],

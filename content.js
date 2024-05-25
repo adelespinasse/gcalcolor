@@ -2,73 +2,87 @@
 
 "use strict";
 
-// Colorizes an event element. Finds the colored dot, then sets the
-// overall color to that dot's color (which is its borderColor; the
-// dot is just an empty 0x0 element with a circular border). Also
-// hides the dot, since it is no longer needed to show the color, and
-// reduces padding to help line up events and let you see more of
-// their names.
-function colorizeEvent(eventEl) {
-  let success = true;
-  // First try layout for month and multi-week (custom) views.
-  let dotEl = eventEl;
-  for (let i=0; i<3; i++) {
-    dotEl = dotEl.firstChild;
-    if (!dotEl) {
-      success = false;
-      break;
-    }
+// Colorizes a normal calendar event element. Finds the colored dot, then sets
+// the overall color to that dot's color (which is its borderColor; the dot is
+// just an empty 0x0 element with a circular border). Also hides the dot, since
+// it is no longer needed to show the color. Verifies that the elements are
+// laid out as expected for a normal event, and returns true if so, false if
+// not.
+function colorizeNormalEvent(eventEl) {
+  const eventButton = eventEl.firstChild;
+  if (!eventButton) {
+    return false;
   }
-  if (success) {
-    let color = dotEl.style.borderColor;
-    if (!color) {
-      success = false;  // Probably not a timed event
-    }
-    else {
-      eventEl.firstChild.style.color = color;
-      eventEl.firstChild.style.padding = '0';
-      dotEl.style.display = 'none';
-    }
+  const dotContainer = eventButton.firstChild;
+  if (!dotContainer) {
+    return false;
   }
+  const dotEl = dotContainer.firstChild;
+  if (!dotEl) {
+    return false;
+  }
+  const eventText = dotContainer.nextSibling;
+  if (!eventText) {
+    return false;
+  }
+  const color = dotEl.style.borderColor;
+  if (!color) {
+    return false;
+  }
+  eventText.style.color = color;
+  eventText.style.padding = '0';
+  eventText.style.opacity = '1.0';
+  eventButton.style.marginLeft = '0';
+  dotEl.style.display = 'none';
+  return true;
+}
 
-  // if the above failed, try the Schedule (Agenda) layout
-  if (!success) {
-    let timeEl = eventEl.firstChild;
-    if (!timeEl) {
-      return;
-    }
-    let detailsEl = timeEl.nextSibling;
-    if (!detailsEl) {
-      return;
-    }
-    let dotContainer1El = detailsEl.nextSibling;
-    if (!dotContainer1El) {
-      return;
-    }
-    let dotContainer2El = dotContainer1El.firstChild;
-    if (!dotContainer2El) {
-      return;
-    }
-    let dotEl = dotContainer2El.firstChild;
-    if (!dotEl) {
-      return;
-    }
-    let color = dotEl.style.borderColor;
-    if (!color) {
-      return;
-    }
-    else {
-      detailsEl.style.color = color;
-      eventEl.style.height = '28px';
-      dotContainer1El.style.display = 'none';
-    }
+// Colorizes an agenda/schedule event element, similarly to colorizeNormalEvent
+// above.
+function colorizeAgendaEvent(eventEl) {
+  const timeEl = eventEl.firstChild;
+  if (!timeEl) {
+    return;
+  }
+  const detailsEl = timeEl.nextSibling;
+  if (!detailsEl) {
+    return;
+  }
+  const dotContainer1El = detailsEl.nextSibling;
+  if (!dotContainer1El) {
+    return;
+  }
+  const dotContainer2El = dotContainer1El.firstChild;
+  if (!dotContainer2El) {
+    return;
+  }
+  const dotEl = dotContainer2El.firstChild;
+  if (!dotEl) {
+    return;
+  }
+  const color = dotEl.style.borderColor;
+  if (!color) {
+    return;
+  }
+  else {
+    detailsEl.style.color = color;
+    eventEl.style.height = '28px';
+    eventEl.style.opacity = '1.0';
+    dotContainer1El.style.display = 'none';
+  }
+}
+
+// Colorizes a single event element.
+function colorizeEvent(eventEl) {
+  if (!colorizeNormalEvent(eventEl)) {
+    colorizeAgendaEvent(eventEl);
   }
 }
 
 // Colorizes all visible events.
 function colorizeAll() {
-  let eventElements = document.querySelectorAll('[data-eventid]');
-  for (let eventElement of eventElements) {
+  const eventElements = document.querySelectorAll('[data-eventid]');
+  for (const eventElement of eventElements) {
     colorizeEvent(eventElement);
   }
 }
@@ -102,7 +116,7 @@ function observerCallback(mutationList) {
   timeoutId = setTimeout(postObserverCallbacks, observerDelay);
 }
 
-let observer = new MutationObserver(observerCallback);
+const observer = new MutationObserver(observerCallback);
 observer.observe(
   document.body,
   {
